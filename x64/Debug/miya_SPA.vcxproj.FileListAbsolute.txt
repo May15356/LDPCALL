@@ -1,0 +1,7 @@
+E:\coding\miya_SPA\x64\Debug\miya_SPA.exe
+E:\coding\miya_SPA_std(好像是对的)\miya_SPA_std\x64\Debug\miya_SPA.exe
+E:\AAASPA\miya_SPA_std\x64\Debug\miya_SPA.exe
+E:\AAASPA\shuffled_SPA_std\x64\Debug\miya_SPA.exe
+E:\AAASPA\shuffled_SPA_MS_std\x64\Debug\miya_SPA.exe
+E:\AAASPA\shuffled_SPA_MS_simplified\x64\Debug\miya_SPA.exe
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\x64\Debug\miya_SPA.exe

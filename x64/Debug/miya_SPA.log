@@ -1,0 +1,17 @@
+﻿  main.cpp
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\channel.h(108,19): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              _Rep=__int64
+          ]
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\channel.h(171,19): warning C4244: “初始化”: 从“_Rep”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              _Rep=__int64
+          ]
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\Decoder.h(146,16): warning C4101: “tmp_x”: 未引用的局部变量
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 缺失的可变参数 2 为格式字符串“%c”所需
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 此参数用作缓冲区大小
+  miya_SPA.vcxproj -> E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\x64\Debug\miya_SPA.exe
