@@ -36,50 +36,51 @@ public:
     int nCN;
     int nVN;
     int nMessage;
-    int nEdge;
-    double* edgeAbsArray;
-    bool* edgeSgnArray;
-    bool* edgeCheck;
     struct CN* cnArray;
     struct VN* vnArray;
-    int channel;
     long int nMostFrame;
     int nRep;
     double R;
     int nLeastErrorFrame;
+    int nEbNo;
+    double* EbN0;
     void initChannelSetting();
     //void ResetChannelSetting();
 };
 
 void codeSetting::initChannelSetting() {
+    double EbNo[] = { 1.8,2,2.1,2.5,2.8,2.9,3,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.9,4.1,4.3,4.5,4.7,4.8,4.9,5,5.1 };
     nMaxIter = 150;
     rep = 1;
     nLeastErrorFrame = 50;
+    nEbNo = sizeof(EbNo) / sizeof(double);
+    EbN0 = new double[nEbNo];
+    memcpy(EbN0,EbNo, sizeof(EbNo));
     path = "codeFile//H576_144.code";
     //path_code = "codeFile//code.txt";
 
     FILE* fp;
-    fopen_s(&fp, path, "r");
-    fscanf_s(fp, "%d", &nVN);
-    fscanf_s(fp, "%d", &nCN);
+    fp=fopen(path, "r");
+    fscanf(fp, "%d", &nVN);
+    fscanf(fp, "%d", &nCN);
     vnArray = new VN[nVN];
     cnArray = new CN[nCN];
     int nullint;
-    fscanf_s(fp, "%d", &nullint);
-    fscanf_s(fp, "%d", &nullint);
+    fscanf(fp, "%d", &nullint);
+    fscanf(fp, "%d", &nullint);
     for (int i = 0; i < nVN; i++) {
-        fscanf_s(fp, "%d", &vnArray[i].degree);
+        fscanf(fp, "%d", &vnArray[i].degree);
         vnArray[i].cnIndex = new int[vnArray[i].degree];
     }
     for (int i = 0; i < nCN; i++) {
-        fscanf_s(fp, "%d", &cnArray[i].degree);
+        fscanf(fp, "%d", &cnArray[i].degree);
         cnArray[i].vnIndex = new int[cnArray[i].degree];
     }
     int temp;
     for (int thisVN = 0; thisVN < nVN; thisVN++) {
         for (int j = 0; j < vnArray[thisVN].degree; j++)
         {
-            fscanf_s(fp, "%d", &temp);
+            fscanf(fp, "%d", &temp);
             temp--;
             vnArray[thisVN].cnIndex[j] = temp;
         }
@@ -87,7 +88,7 @@ void codeSetting::initChannelSetting() {
     for (int thisCN = 0; thisCN < nCN; thisCN++) {
         for (int j = 0; j < cnArray[thisCN].degree; j++)
         {
-            fscanf_s(fp, "%d", &temp);
+            fscanf(fp, "%d", &temp);
             temp--;
             cnArray[thisCN].vnIndex[j] = temp;
         }

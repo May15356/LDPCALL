@@ -1,53 +1,11 @@
 
-#include "channel.h"
 
+#ifndef Encoder_hpp
+#define Encoder_hpp
+#include "channel.h"
+#include "Matrix.h"
 using namespace std;
 
-void initParityCheck(codeSetting* parityCheck, const char* path, int nMaxIter) {
-
-	FILE* fp;
-
-	fopen_s(&fp, path, "r");
-	fscanf_s(fp, "%d", &parityCheck->nVN);
-	fscanf_s(fp, "%d", &parityCheck->nCN);
-
-	parityCheck->vnArray = new VN[parityCheck->nVN];
-	parityCheck->cnArray = new CN[parityCheck->nCN];
-
-	int nullint;
-	fscanf_s(fp, "%d", &nullint);
-	fscanf_s(fp, "%d", &nullint);
-
-	for (int i = 0; i < parityCheck->nVN; i++) {
-		fscanf_s(fp, "%d", &parityCheck->vnArray[i].degree);
-		parityCheck->vnArray[i].cnIndex = new int[parityCheck->vnArray[i].degree];
-	}
-	for (int i = 0; i < parityCheck->nCN; i++) {
-		fscanf_s(fp, "%d", &parityCheck->cnArray[i].degree);
-		parityCheck->cnArray[i].vnIndex = new int[parityCheck->cnArray[i].degree];
-	}
-	int temp;
-	for (int thisVN = 0; thisVN < parityCheck->nVN; thisVN++) {
-		for (int j = 0; j < parityCheck->vnArray[thisVN].degree; j++)
-		{
-
-			fscanf_s(fp, "%d", &temp);
-			temp--;
-			parityCheck->vnArray[thisVN].cnIndex[j] = temp;
-		}
-	}	
-	for (int thisCN = 0; thisCN < parityCheck->nCN; thisCN++) {
-		for (int j = 0; j < parityCheck->cnArray[thisCN].degree; j++)
-		{
-
-			fscanf_s(fp, "%d", &temp);
-			parityCheck->cnArray[thisCN].vnIndex[j]= temp;
-		}
-	}
-	parityCheck->nMaxIter = nMaxIter;
-	fclose(fp);
-	return;
-}
 
 void initGauss(codeSetting* parityCheck, boolMatrix* gauss, int* exchange) {
 
@@ -264,3 +222,4 @@ bool checkCode(codeSetting* parityCheck, bool* code) {
 	}
 	return codeValid;
 }
+#endif

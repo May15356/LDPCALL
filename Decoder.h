@@ -14,6 +14,7 @@ class GallagerSPA {
 public:
     int nCN;
     int nVN;
+    int maxCNDegree;
     int nEdge;
     double* edgeAbsArray;
     bool* edgeSgnArray;
@@ -143,7 +144,6 @@ void GallagerSPA::SPAdecode(double* recieved, double gaussVar, bool* decoded, in
     for (int nIter = 0; nIter < nMaxIter; nIter++)
     {
         // CN update
-        double tmp_x;
         int cn = 0;
         //quantify(edgeAbsArray, nEdge);
         // VN update  LLR total  
@@ -198,7 +198,7 @@ void GallagerSPA::SPAdecode(double* recieved, double gaussVar, bool* decoded, in
 int GallagerSPA::MSdecodeshuffle(double* recieved, double gaussVar, bool* decoded, int rep)
 {
     double* arr;
-    arr = new double[28];
+    arr = new double[maxCNDegree];
     double delta = 0.625;
     // Initialization
     for (int j = 0; j < nVN; j++) {
@@ -356,24 +356,24 @@ void initdecoder(GallagerSPA* decoder, const char* path, int nMaxIter) {
 
     FILE* fp;
 
-    fopen_s(&fp, path, "r");
-    fscanf_s(fp, "%d", &decoder->nVN);
-    fscanf_s(fp, "%d", &decoder->nCN);
+    fp=fopen(path, "r");
+    fscanf(fp, "%d", &decoder->nVN);
+    fscanf(fp, "%d", &decoder->nCN);
 
     decoder->vnArray = new VN[decoder->nVN];
     decoder->cnArray = new CN[decoder->nCN];
 
     int nullint;
-    fscanf_s(fp, "%d", &nullint);
-    fscanf_s(fp, "%d", &nullint);
+    fscanf(fp, "%d", &nullint);
+    fscanf(fp, "%d", &decoder->maxCNDegree);
 
     for (int i = 0; i < decoder->nVN; i++) {
-        fscanf_s(fp, "%d", &decoder->vnArray[i].degree);
+        fscanf(fp, "%d", &decoder->vnArray[i].degree);
         decoder->vnArray[i].edgeIndex = new int[decoder->vnArray[i].degree];
         decoder->vnArray[i].cnIndex = new int[decoder->vnArray[i].degree];
     }
     for (int i = 0; i < decoder->nCN; i++) {
-        fscanf_s(fp, "%d", &decoder->cnArray[i].degree);
+        fscanf(fp, "%d", &decoder->cnArray[i].degree);
         decoder->cnArray[i].edgeIndex = new int[decoder->cnArray[i].degree];
     }
 
@@ -391,7 +391,7 @@ void initdecoder(GallagerSPA* decoder, const char* path, int nMaxIter) {
         for (int j = 0; j < decoder->vnArray[thisVN].degree; j++)
         {
 
-            fscanf_s(fp, "%d", &thisCN);
+            fscanf(fp, "%d", &thisCN);
             thisCN--;
             decoder->vnArray[thisVN].cnIndex[j] = thisCN;
             decoder->vnArray[thisVN].edgeIndex[j] = indexEdge;

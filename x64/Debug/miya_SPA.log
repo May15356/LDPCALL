@@ -9,9 +9,8 @@ E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\channel.h(171,19): warning C424
           [
               _Rep=__int64
           ]
-E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\Decoder.h(146,16): warning C4101: “tmp_x”: 未引用的局部变量
-E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
-E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
-E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 缺失的可变参数 2 为格式字符串“%c”所需
-E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\BasicFunction.h(71,19): message : 此参数用作缓冲区大小
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\Decoder.h(147,16): warning C4101: “tmp_x”: 未引用的局部变量
+E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\main.cpp(111,67): warning C4805: “!=”: 在操作中将类型“char”与类型“bool”混合不安全
+  mersenne.cpp
+  正在生成代码...
   miya_SPA.vcxproj -> E:\allProjects\AAASPA\shuffled_SPA_MS_simplified\x64\Debug\miya_SPA.exe

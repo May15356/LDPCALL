@@ -3,7 +3,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
-
+#include "Encoder.h"
+#include "Matrix.h"
 int nchoosek(int n, int k) {
 	int ans = 1;
 	for (int i = 0; i < k; i++) {
@@ -63,12 +64,12 @@ bool isCorrectFrame(bool* encoded, bool* decoded, int n, int &biterror)
 
 void initEncode(const char* path, int n, boolMatrix* encoded) {
 	FILE* fp2;
-	fopen_s(&fp2, path, "r");
+	fp2=fopen(path, "r");
 	char c;
 	for (int i = 0; i < 1; i++) {
 		for (int j = 0; j < n; j++) {
 			while (true) {
-				fscanf_s(fp2, "%c", &c);
+				fscanf(fp2, "%c", &c);
 				if (c == '1' || c == '0') {
 					break;
 				}

@@ -18,8 +18,6 @@ CRandomMersenne rng(1);
 void simulateSPA(codeSetting* channel, double iEbNo, boolMatrix* parityc_mat, int* exchange);
 
 int main() {
-    double EbNo[ ] = { 1.8,2,2.1,2.5,2.8,2.9,3,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.9,4.1,4.3,4.5,4.7,4.8,4.9,5,5.1 };
-    int nEbNo = sizeof(EbNo) / sizeof(double);
     codeSetting* channel = new codeSetting;
     channel->initChannelSetting();
     boolMatrix* parityc_mat = new boolMatrix;
@@ -32,9 +30,9 @@ int main() {
     initGauss(channel, parityc_mat, exchange);
     countGauss(channel, parityc_mat, exchange, rank);
     checkGauss(channel, parityc_mat, rank);
-    for (int i = 0; i < nEbNo; i++)
+    for (int i = 0; i < channel->nEbNo; i++)
     {
-        double iEbNo = EbNo[i];
+        double iEbNo = channel->EbN0[i];
         thread th0(simulateSPA, channel, iEbNo, parityc_mat,exchange);
         thread th1(simulateSPA, channel, iEbNo, parityc_mat, exchange);
         thread th2(simulateSPA, channel, iEbNo, parityc_mat, exchange);
@@ -119,7 +117,7 @@ void simulateSPA(codeSetting* channel, double EbNo, boolMatrix* parityc_mat, int
         //ber
         decoder->SPAdecode(received->val[0], var, decoded->val[0], channel->rep);
         //varSet->averItr= varSet->averItr+(double)decoder->MSdecodeshuffle(received->val[0], var, decoded->val[0], channel->rep);
-        flagerror=!isCorrectFrame(encoded->val[0], decoded->val[0], channel->nVN, varSet->biterror);
+        flagerror = !isCorrectFrame(encoded->val[0], decoded->val[0], channel->nVN, varSet->biterror);
         //hardber
         varSet->hardaverItr = varSet->hardaverItr + (double)decoder->MSdecodeshuffle(hardreceived->val[0], var, decoded->val[0], channel->rep);
         isCorrectFrame(encoded->val[0], decoded->val[0], channel->nVN, varSet->hardbiterror);
